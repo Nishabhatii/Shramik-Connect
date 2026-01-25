@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Employer Dashboard | ShramikConnect</title>
+  <link rel="stylesheet" href="Index.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+</head>
+
+<body class="light-theme">
+  <div class="notification-wrapper" id="notificationWrapper"></div>
+
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+  <div class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-close" id="sidebarClose">
+        <i class="fas fa-times"></i>
+      </div>
+      <h2 data-i18n="menu">Menu</h2>
+    </div>
+
+    <div class="sidebar-content">
+      <div class="sidebar-profile">
+        <div class="profile-photo">
+          <img src="assets/ShramikConnect_logo.jpg" alt="ShramikConnect" class="logo-img" onerror="this.style.display='none'" />
+        </div>
+        <div class="profile-info">
+          <h3 id="profileName">Employer Name</h3>
+          <p id="profileEmail" class="email-text">employer@example.com</p>
+          <button class="profile-edit-btn" id="profileEditBtn" data-i18n="edit_profile">
+            <i class="fas fa-edit"></i>
+            <span>Edit Profile</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="sidebar-settings-icon" id="sidebarSettingsIcon" aria-label="Settings" tabindex="0" role="button">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" stroke="currentColor" stroke-width="2" />
+          <path
+            d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"
+            stroke="currentColor"
+            stroke-width="2"
+          />
+        </svg>
+        <span data-i18n="settings">Settings</span>
+      </div>
+
+      <div class="sidebar-menu">
+        <a href="Help.html" class="menu-item-box">
+          <i class="fas fa-question-circle"></i>
+          <span data-i18n="help_contact">Help & Contact</span>
+        </a>
+        <a href="About.html" class="menu-item-box">
+          <i class="fas fa-info-circle"></i>
+          <span data-i18n="about_us">About Us</span>
+        </a>
+        <a href="term_and_condition.html" class="menu-item-box">
+          <i class="fas fa-file-contract"></i>
+          <span data-i18n="terms_conditions">Terms & Conditions</span>
+        </a>
+        <a href="privacy_policy.html" class="menu-item-box">
+          <i class="fas fa-shield-alt"></i>
+          <span data-i18n="privacy_policy">Privacy Policy</span>
+        </a>
+        <button class="menu-item-box logout-btn" id="logoutBtn">
+          <i class="fas fa-sign-out-alt"></i>
+          <span data-i18n="logout">Logout</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="settings-dropdown" id="settingsDropdown" aria-hidden="true">
+    <div class="settings-section">
+      <h3 class="settings-heading" data-i18n="language">Language</h3>
+      <div class="language-switcher">
+        <button class="language-option active" data-lang="en">English</button>
+        <button class="language-option" data-lang="hi">हिन्दी</button>
+        <button class="language-option" data-lang="mr">मराठी</button>
+      </div>
+    </div>
+
+    <div class="settings-section">
+      <h3 class="settings-heading" data-i18n="theme">Theme</h3>
+      <div class="theme-switcher">
+        <button class="theme-option active" data-theme="light"><span data-i18n="light">Light</span></button>
+        <button class="theme-option" data-theme="dark"><span data-i18n="dark">Dark</span></button>
+        <button class="theme-option" data-theme="system"><span data-i18n="system">System</span></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="popup-overlay" id="assignmentPopup">
+    <div class="popup-container">
+      <div class="popup-header">
+        <h2 data-i18n="assign_worker">Assign Worker</h2>
+        <button class="popup-close" id="closeAssignmentPopupBtn" disabled>
+          <span data-i18n="close">Close</span> (<span id="assignmentCountdown">10</span>s)
+        </button>
+      </div>
+
+      <div class="popup-content">
+        <div class="assignment-profile-photo">
+          <img id="assignmentWorkerPhoto" src="https://ui-avatars.com/api/?name=Worker&background=01A060&color=fff&size=150" alt="Worker Photo" />
+        </div>
+
+        <div class="assignment-details">
+          <h3 id="assignmentWorkerName">Worker Name</h3>
+          <div class="assignment-rating">
+            <div class="stars-container" id="assignmentRatingStars"></div>
+            <span class="rating-value" id="assignmentRatingValue">0.0</span>
+          </div>
+          <p class="assignment-occupation" id="assignmentOccupation">Occupation</p>
+        </div>
+
+        <div class="job-details-card">
+          <h4 data-i18n="job_details">Job Details</h4>
+          <div class="job-detail-row">
+            <span class="job-label" data-i18n="job_title">Job Title:</span>
+            <span class="job-value" id="assignmentJobTitle">Loading...</span>
+          </div>
+          <div class="job-detail-row">
+            <span class="job-label" data-i18n="ask_amount">Ask Amount:</span>
+            <span class="job-value" id="assignmentAskAmount">₹0</span>
+          </div>
+          <div class="job-detail-row">
+            <span class="job-label" data-i18n="distance">Distance:</span>
+            <span class="job-value" id="assignmentDistance">0 km</span>
+          </div>
+        </div>
+
+        <button class="visit-profile-btn" id="visitProfileBtn">
+          <i class="fas fa-external-link-alt"></i>
+          <span data-i18n="visit_profile">Visit Profile</span>
+        </button>
+
+        <div class="terms-checkbox-container">
+          <input type="checkbox" id="assignmentTermsCheckbox" class="form-checkbox" />
+          <label for="assignmentTermsCheckbox" class="checkbox-label">
+            <span data-i18n="agree_terms">I agree to the Terms & Conditions</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="popup-footer">
+        <p class="timer-info" data-i18n="timer_info">Close button enabled when timer ends</p>
+        <div class="timer-display">
+          <i class="fas fa-clock"></i>
+          <span data-i18n="timer">Timer:</span>
+          <span id="assignmentTimerDisplay">10</span>
+          <span data-i18n="seconds">s remaining</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="popup-overlay" id="jobPostingPopup">
+    <div class="popup-container">
+      <div class="popup-header">
+        <h2 data-i18n="post_new_job">Post New Job</h2>
+        <button class="popup-close" id="closeJobPopupBtn">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <div class="popup-content">
+        <form id="jobPostingForm">
+          <div class="form-group">
+            <label for="employerName" class="form-label" data-i18n="employer_name">Employer Name</label>
+            <div class="input-with-icon">
+              <i class="fas fa-user-tie input-icon"></i>
+              <input type="text" id="employerName" class="form-input" readonly value="Loading..." />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" data-i18n="choose_address">Choose Address</label>
+            <div class="address-options">
+              <div class="address-option" data-address="home">
+                <i class="fas fa-home"></i>
+                <span data-i18n="home_address">Home Address</span>
+              </div>
+              <div class="address-option" data-address="other">
+                <i class="fas fa-map-marker-alt"></i>
+                <span data-i18n="other_address">Other Address (DIGIPIN)</span>
+              </div>
+            </div>
+            <div class="address-input-container" id="digipinContainer" style="display: none;">
+              <div class="input-with-icon">
+                <i class="fas fa-key input-icon"></i>
+                <input type="text" id="digipinInput" class="form-input" placeholder="Enter DIGIPIN" maxlength="6" />
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="workType" class="form-label" data-i18n="work_type">Type of Work</label>
+            <div class="input-with-icon">
+              <i class="fas fa-briefcase input-icon"></i>
+              <input type="text" id="workType" class="form-input" placeholder="e.g., Plumber, Electrician, Carpenter" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="jobDescription" class="form-label" data-i18n="job_description">Job Description</label>
+            <div class="input-with-icon">
+              <i class="fas fa-file-alt input-icon"></i>
+              <textarea id="jobDescription" class="form-input textarea" placeholder="Describe the work in detail..." rows="4" required></textarea>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="budget" class="form-label" data-i18n="budget_amount">Budget Amount (₹)</label>
+            <div class="input-with-icon">
+              <i class="fas fa-rupee-sign input-icon"></i>
+              <input type="number" id="budget" class="form-input" placeholder="Enter amount in rupees" min="100" step="100" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" data-i18n="tools_available">Tools Available</label>
+            <div class="tools-options">
+              <div class="tools-option" data-tools="yes">
+                <i class="fas fa-tools"></i>
+                <span data-i18n="tools_yes">Yes, I have tools</span>
+              </div>
+              <div class="tools-option" data-tools="no">
+                <i class="fas fa-times-circle"></i>
+                <span data-i18n="tools_no">No, worker should bring</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="urgency" class="form-label" data-i18n="urgency_level">Urgency Level</label>
+            <div class="urgency-options">
+              <div class="urgency-option" data-urgency="low">
+                <i class="fas fa-calendar"></i>
+                <span data-i18n="urgency_low">Low (Within 1 week)</span>
+              </div>
+              <div class="urgency-option" data-urgency="medium">
+                <i class="fas fa-calendar-day"></i>
+                <span data-i18n="urgency_medium">Medium (Within 3 days)</span>
+              </div>
+              <div class="urgency-option" data-urgency="high">
+                <i class="fas fa-clock"></i>
+                <span data-i18n="urgency_high">High (Within 24 hours)</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="additionalRequirements" class="form-label" data-i18n="additional_req">Additional Requirements</label>
+            <div class="input-with-icon">
+              <i class="fas fa-clipboard-list input-icon"></i>
+              <textarea id="additionalRequirements" class="form-input textarea" placeholder="Any special requirements or instructions..." rows="3"></textarea>
+            </div>
+          </div>
+
+          <button type="submit" class="submit-job-btn" id="submitJobBtn" data-i18n="post_job">
+            <i class="fas fa-paper-plane"></i>
+            <span>Post Job</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="popup-overlay" id="ratingPopup">
+    <div class="popup-container rating-popup">
+      <div class="popup-header">
+        <h2 data-i18n="rate_worker">Rate Worker</h2>
+        <button class="popup-close" id="closeRatingPopupBtn">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <div class="popup-content">
+        <div class="rating-worker-info">
+          <div class="rating-worker-photo">
+            <img id="ratingWorkerPhoto" src="" alt="Worker Photo" />
+          </div>
+          <h3 id="ratingWorkerName">Worker Name</h3>
+          <p class="rating-worker-job" id="ratingWorkerJob">Job Title</p>
+        </div>
+
+        <div class="rating-instruction">
+          <p data-i18n="rate_instruction">Please rate the worker's performance for this job</p>
+        </div>
+
+        <div class="rating-stars-container">
+          <div class="stars-rating" id="starsRating">
+            <div class="star" data-rating="1">★</div>
+            <div class="star" data-rating="2">★</div>
+            <div class="star" data-rating="3">★</div>
+            <div class="star" data-rating="4">★</div>
+            <div class="star" data-rating="5">★</div>
+          </div>
+          <div class="rating-value-display">
+            <span id="ratingSelectedValue">0</span>
+            <span>/5</span>
+          </div>
+        </div>
+
+        <div class="rating-feedback">
+          <label for="ratingFeedback" data-i18n="additional_feedback">Additional Feedback (Optional)</label>
+          <textarea id="ratingFeedback" class="form-input textarea" placeholder="Share your experience with this worker..." rows="4"></textarea>
+        </div>
+
+        <button class="submit-rating-btn" id="submitRatingBtn" data-i18n="submit_rating">
+          <i class="fas fa-star"></i>
+          <span>Submit Rating</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <nav class="navbar">
+    <div class="nav-left">
+      <button class="hamburger-btn" id="hamburgerBtn">
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="logo" id="logoContainer">
+        <img src="assets/ShramikConnect_logo.jpg" alt="ShramikConnect" class="logo-img" onerror="this.style.display='none'" />
+        <h1><span class="logo-shramik">Shramik</span><span class="logo-connect">Connect</span></h1>
+      </div>
+    </div>
+
+    <div class="nav-right">
+      <a href="#" class="nav-link active" data-i18n="home">
+        <i class="fas fa-home"></i>
+        <span class="nav-text" data-i18n="home">Home</span>
+        <div class="active-indicator"></div>
+      </a>
+      <a href="Help.html" class="nav-link" data-i18n="help">
+        <i class="fas fa-question-circle"></i>
+        <span class="nav-text" data-i18n="help">Help</span>
+      </a>
+      <a href="About.html" class="nav-link" data-i18n="about">
+        <i class="fas fa-info-circle"></i>
+        <span class="nav-text" data-i18n="about">About</span>
+      </a>
+    </div>
+  </nav>
+
+  <main class="main-content" id="mainContent">
+    <section class="welcome-dashboard">
+      <div class="welcome-header">
+        <h1 class="welcome-title">
+          <span data-i18n="welcome">Welcome</span>,
+          <span class="employer-name" id="employerNameDisplay"></span>!
+        </h1>
+        <p class="welcome-slogan" data-i18n="welcome_slogan">
+          Find Perfect Worker According to your location, budget, timings and requirements
+        </p>
+      </div>
+
+      <div class="statistics-grid">
+        <div class="stat-card workers-hired">
+          <div class="stat-icon"><i class="fas fa-users"></i></div>
+          <div class="stat-content">
+            <h3 class="stat-title" data-i18n="workers_hired">Workers Hired</h3>
+            <div class="stat-value" id="workersHiredValue">0</div>
+            <div class="stat-label" data-i18n="till_now">Till Now</div>
+          </div>
+          <div class="stat-badge"><i class="fas fa-chart-line"></i></div>
+        </div>
+
+        <div class="stat-card jobs-posted">
+          <div class="stat-icon"><i class="fas fa-briefcase"></i></div>
+          <div class="stat-content">
+            <h3 class="stat-title" data-i18n="jobs_posted">Jobs Posted</h3>
+            <div class="stat-value" id="jobsPostedValue">0</div>
+            <div class="stat-label" data-i18n="till_now">Till Now</div>
+          </div>
+          <div class="stat-badge"><i class="fas fa-file-alt"></i></div>
+        </div>
+
+        <div class="stat-card average-rating">
+          <div class="stat-icon"><i class="fas fa-star"></i></div>
+          <div class="stat-content">
+            <h3 class="stat-title" data-i18n="avg_rating">Average Rating</h3>
+            <div class="rating-display">
+              <div class="stars-container" id="ratingStars"></div>
+              <div class="rating-value" id="ratingValue">0.0</div>
+            </div>
+            <div class="stat-label" data-i18n="given_to_workers">Given to Workers</div>
+          </div>
+          <div class="stat-badge"><i class="fas fa-award"></i></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="accepted-workers-section" id="acceptedWorkersSection">
+      <div class="section-header">
+        <h2 class="section-title" data-i18n="accepted_workers">Accepted Workers</h2>
+        <button class="post-job-float-btn" id="postJobFloatBtn">
+          <i class="fas fa-plus"></i>
+          <span data-i18n="post_job">Post Job</span>
+        </button>
+      </div>
+
+      <div class="empty-state-container" id="emptyStateContainer"></div>
+
+      <div class="filters-search-container" id="filtersSearchContainer" style="display: none;">
+        <div class="filter-strip">
+          <div class="filter-buttons">
+            <button class="filter-btn" data-filter="name" data-i18n="name">
+              <span>Name</span>
+              <i class="fas fa-chevron-down"></i>
+            </button>
+            <button class="filter-btn" data-filter="time" data-i18n="acceptance_time">
+              <span>Acceptance Time</span>
+              <i class="fas fa-chevron-down"></i>
+            </button>
+            <button class="filter-btn" data-filter="distance" data-i18n="distance">
+              <span>Distance</span>
+              <i class="fas fa-chevron-down"></i>
+            </button>
+            <button class="filter-btn" data-filter="rating" data-i18n="rating">
+              <span>Rating</span>
+              <i class="fas fa-chevron-down"></i>
+            </button>
+            <button class="filter-btn" data-filter="price" data-i18n="price">
+              <span>Price</span>
+              <i class="fas fa-chevron-down"></i>
+            </button>
+            <button class="filter-btn" data-filter="profession" data-i18n="profession">
+              <span>Profession</span>
+              <i class="fas fa-chevron-down"></i>
+            </button>
+          </div>
+
+          <div class="search-container">
+            <div class="input-with-icon">
+              <i class="fas fa-search input-icon"></i>
+              <input type="text" id="workerSearch" class="form-input search-input" placeholder="Search workers..." data-i18n="search_placeholder" />
+            </div>
+          </div>
+        </div>
+
+        <div class="filter-dropdown" id="filterDropdown">
+          <div class="filter-options" id="filterOptions"></div>
+        </div>
+      </div>
+
+      <div class="job-tables-container" id="jobTablesContainer"></div>
+
+      <div class="pagination-container" id="paginationContainer" style="display: none;">
+        <button class="pagination-btn prev-btn" id="prevPageBtn" disabled>
+          <i class="fas fa-chevron-left"></i>
+          <span data-i18n="previous">Previous</span>
+        </button>
+
+        <div class="page-indicators" id="pageIndicators"></div>
+
+        <button class="pagination-btn next-btn" id="nextPageBtn" disabled>
+          <span data-i18n="next">Next</span>
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <script src="Index.js"></script>
+</body>
+</html>

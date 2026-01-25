@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About | ShramikConnect</title>
+
+  <link rel="stylesheet" href="Index.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+</head>
+
+<body class="light-theme">
+  <nav class="navbar">
+    <div class="nav-left">
+      <div class="logo" id="logoContainer">
+        <img src="assets/ShramikConnect_logo.jpg" alt="ShramikConnect" class="logo-img" onerror="this.style.display='none'">
+        <h1>
+          <span class="logo-shramik">Shramik</span><span class="logo-connect">Connect</span>
+        </h1>
+      </div>
+    </div>
+
+    <div class="nav-right">
+      <a href="Index.html" class="nav-link">
+        <i class="fas fa-home"></i>
+        <span class="nav-text">Home</span>
+      </a>
+
+      <a href="Help.html" class="nav-link">
+        <i class="fas fa-question-circle"></i>
+        <span class="nav-text">Help</span>
+      </a>
+
+      <a href="About.html" class="nav-link active">
+        <i class="fas fa-info-circle"></i>
+        <span class="nav-text">About</span>
+        <div class="active-indicator"></div>
+      </a>
+    </div>
+  </nav>
+
+  <main class="main-content" style="margin-top: 90px;">
+    <section class="welcome-dashboard">
+      <div class="welcome-header">
+        <h1 class="welcome-title">About ShramikConnect</h1>
+        <p class="welcome-slogan">
+          A platform to connect employers with trusted workers quickly and easily.
+        </p>
+      </div>
+
+      <div class="empty-state-container" style="margin-top: 25px;">
+        <h2 class="empty-state-title">Our Mission</h2>
+        <p class="empty-state-message" style="margin-top: 10px;">
+          ShramikConnect helps employers find workers based on location, budget, timing, and requirements.
+          We aim to make hiring simple, fast, and reliable.
+        </p>
+
+        <div style="margin-top: 18px; display: grid; gap: 12px;">
+          <div class="assigned-job-details">
+            <h3 class="assigned-job-title">Why ShramikConnect?</h3>
+            <p class="assigned-job-meta">
+              Verified profiles, easy job posting, fast worker acceptance, and smooth hiring experience.
+            </p>
+          </div>
+
+          <div class="assigned-job-details">
+            <h3 class="assigned-job-title">Features</h3>
+            <p class="assigned-job-meta">
+              • Post jobs instantly<br />
+              • View accepted workers<br />
+              • Assign worker with confirmation<br />
+              • Rate workers after completion<br />
+              • Theme + Language settings
+            </p>
+          </div>
+
+          <div class="assigned-job-details">
+            <h3 class="assigned-job-title">Version</h3>
+            <p class="assigned-job-meta">
+              ShramikConnect Employer Dashboard v1.0
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="Index.js"></script>
+</body>
+</html>
