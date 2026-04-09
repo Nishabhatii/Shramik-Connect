@@ -1,0 +1,98 @@
+<!-- ================= EMPLOYER HOME PAGE ================= -->
+<!-- employer.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employer Home</title>
+  <link rel="stylesheet" href="employer.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <button id="menuBtn"><i class="fas fa-bars"></i></button>
+  <h2>ShramikConnect</h2>
+</nav>
+
+<aside class="sidebar" id="sidebar">
+  <h3>Menu</h3>
+  <a href="#">Home</a>
+  <a href="#">History</a>
+</aside>
+
+<main>
+
+<section class="welcome">
+  <h1>Welcome Employer</h1>
+</section>
+
+<section class="filters">
+  <input type="text" placeholder="Search jobs..." />
+  <button class="chatbot-btn"><i class="fas fa-robot"></i></button>
+</section>
+
+<section class="job-table">
+  <table>
+    <thead>
+      <tr>
+        <th>Job</th>
+        <th>Worker</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody id="jobData"></tbody>
+  </table>
+</section>
+
+<div class="pagination">
+  <button id="prev">Prev</button>
+  <div id="dots"></div>
+  <button id="next">Next</button>
+</div>
+
+<section class="history">
+  <h2>Completed Work</h2>
+  <ul id="historyList"></ul>
+</section>
+
+<footer>
+  <p>© 2026 ShramikConnect</p>
+</footer>
+
+</main>
+
+<!-- CHAT MODAL -->
+<div class="modal" id="chatModal">
+  <div class="chat-box">
+    <div class="chat-header">
+      <span>Chat</span>
+      <button id="closeChat">X</button>
+    </div>
+    <div class="chat-body" id="chatBody"></div>
+    <div class="chat-footer">
+      <input type="text" id="chatInput">
+      <button id="sendMsg">Send</button>
+    </div>
+  </div>
+</div>
+
+<!-- RATING MODAL -->
+<div class="modal" id="ratingModal">
+  <div class="rating-box">
+    <h3>Rate Worker</h3>
+    <div id="stars">
+      <span data-val="1">★</span>
+      <span data-val="2">★</span>
+      <span data-val="3">★</span>
+      <span data-val="4">★</span>
+      <span data-val="5">★</span>
+    </div>
+    <button id="submitRating">Submit</button>
+  </div>
+</div>
+
+<script src="employer.js"></script>
+</body>
+</html>

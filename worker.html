@@ -1,0 +1,45 @@
+<!-- ================= WORKER HOME PAGE ================= -->
+<!-- worker.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Worker Home</title>
+  <style>/* worker.css */
+body {font-family:Arial;}
+.navbar {background:#333; color:#fff; padding:10px;}
+.filters {display:flex; gap:10px; padding:10px;}
+table {width:100%;}</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <h2>ShramikConnect</h2>
+</nav>
+
+<section class="welcome">
+  <h1>Welcome Worker</h1>
+</section>
+
+<section class="filters">
+  <input type="text" placeholder="Search jobs..." />
+  <button><i class="fas fa-robot"></i></button>
+</section>
+
+<section>
+  <table>
+    <thead>
+      <tr>
+        <th>Job</th>
+        <th>Budget</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody id="jobs"></tbody>
+  </table>
+</section>
+
+<script src="worker.js"></script>
+</body>
+</html>
